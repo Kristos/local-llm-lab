@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.venv/
+venv/
+env/
+*.egg-info/
+
+# Model weights — never commit
+*.gguf
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.ckpt
+checkpoints/
+models/
+
+# Datasets — only templates and tiny samples are committed
+datasets/raw/
+datasets/processed/
+datasets/*.parquet
+datasets/*.arrow
+# Allow toy dataset and template
+!datasets/toy/
+!datasets/README.md
+
+# Experiment tracking
+wandb/
+runs/
+tensorboard/
+mlruns/
+lightning_logs/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local config
+.env
+*.local
+
+# Build artifacts
+build/
+dist/
+*.egg
