@@ -10,9 +10,12 @@ import sys
 import os
 import time
 
-# Prevent datasets library from importing torchvision.io.VideoReader
-# (removed in torchvision 0.26+ — causes ImportError in the data loader)
-os.environ["TORCHVISION_DISABLE_VIDEO"] = "1"
+# Monkey-patch torchvision.io.VideoReader (removed in 0.26+) before datasets imports it.
+# The datasets torch_formatter tries `from torchvision.io import VideoReader` at runtime,
+# which crashes with ImportError. A stub class satisfies the import without affecting anything.
+import torchvision.io
+if not hasattr(torchvision.io, 'VideoReader'):
+    torchvision.io.VideoReader = type('VideoReader', (), {})  # type: ignore
 
 import torch
 
