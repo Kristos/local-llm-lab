@@ -43,7 +43,8 @@ ok("CUDA available", f"runtime {torch.version.cuda}")
 try:
     gpu_name = torch.cuda.get_device_name(0)
     sm = torch.cuda.get_device_capability(0)
-    vram_mb = torch.cuda.get_device_properties(0).total_mem // (1024 * 1024)
+    props = torch.cuda.get_device_properties(0)
+    vram_mb = getattr(props, 'total_memory', getattr(props, 'total_mem', 0)) // (1024 * 1024)
     ok("GPU", f"{gpu_name} (sm_{sm[0]}{sm[1]}, {vram_mb} MB)")
 except Exception as e:
     fail("GPU detection", str(e))
