@@ -27,7 +27,7 @@ print("\n[1/4] Loading model via Unsloth (this downloads on first run)...")
 from unsloth import FastLanguageModel
 
 model, tokenizer = FastLanguageModel.from_pretrained(
-    model_name="unsloth/gemma-2-2b-bnb-4bit",
+    model_name="unsloth/tinyllama-bnb-4bit",
     max_seq_length=512,
     load_in_4bit=True,
 )
