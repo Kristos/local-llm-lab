@@ -7,7 +7,13 @@ Expects check-env.py to pass first.
 """
 
 import sys
+import os
 import time
+
+# Prevent datasets library from importing torchvision.io.VideoReader
+# (removed in torchvision 0.26+ — causes ImportError in the data loader)
+os.environ["TORCHVISION_DISABLE_VIDEO"] = "1"
+
 import torch
 
 print("local-llm-lab smoke test\n")
