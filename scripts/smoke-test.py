@@ -75,7 +75,9 @@ toy_data = [
 dataset = Dataset.from_list(toy_data)
 
 def tokenize(example):
-    return tokenizer(example["text"], truncation=True, max_length=512, padding="max_length")
+    tokens = tokenizer(example["text"], truncation=True, max_length=512, padding="max_length")
+    tokens["labels"] = tokens["input_ids"].copy()
+    return tokens
 
 dataset = dataset.map(tokenize, batched=True, remove_columns=["text"])
 dataset.set_format("torch")
