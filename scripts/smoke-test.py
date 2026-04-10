@@ -19,7 +19,7 @@ if not torch.cuda.is_available():
     sys.exit(1)
 
 gpu_name = torch.cuda.get_device_name(0)
-vram_total = torch.cuda.get_device_properties(0).total_mem // (1024 * 1024)
+vram_total = getattr(torch.cuda.get_device_properties(0), 'total_memory', getattr(torch.cuda.get_device_properties(0), 'total_mem', 0)) // (1024 * 1024)
 print(f"GPU: {gpu_name} ({vram_total} MB)")
 
 # 1. Load a small model with Unsloth
